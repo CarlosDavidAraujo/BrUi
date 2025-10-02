@@ -1,0 +1,64 @@
+<div brDialog #dialog="brDialog">
+  <button brDialogTrigger>Editar Perfil</button>
+
+  <ng-template brDialogContent>
+    <div brDialogOverlay></div>
+
+    <div brDialogPanel>
+      <button brDialogClose>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="h-5 w-5"
+        >
+          <path
+            d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z"
+          />
+        </svg>
+        <span class="sr-only">Fechar</span>
+      </button>
+
+      <h2 brDialogTitle>Editar Perfil</h2>
+
+      <p brDialogDescription>
+        Faça alterações no seu perfil aqui. Clique em "Salvar alterações" quando
+        terminar.
+      </p>
+
+      <fieldset class="mt-4 space-y-3">
+        <div class="flex flex-col">
+          <label for="name" class="text-sm font-medium text-slate-800"
+            >Nome</label
+          >
+          <input
+            id="name"
+            type="text"
+            value="John Doe"
+            class="mt-1 rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="username" class="text-sm font-medium text-slate-800"
+            >Usuário</label
+          >
+          <input
+            id="username"
+            type="text"
+            value="@johndoe"
+            class="mt-1 rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+          />
+        </div>
+      </fieldset>
+
+      <div class="mt-6 flex justify-end">
+        <button
+          (click)="dialog.close()"
+          class="rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+        >
+          Salvar alterações
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
