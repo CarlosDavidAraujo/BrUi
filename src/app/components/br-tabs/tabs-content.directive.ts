@@ -1,5 +1,6 @@
 import { Directive, computed, inject, input } from '@angular/core';
 import { BrTabsDirective } from './tabs.directive';
+import { cn } from '@/lib/utils';
 
 @Directive({
   selector: '[brTabContent]',
@@ -10,6 +11,7 @@ import { BrTabsDirective } from './tabs.directive';
     '[id]': 'id',
     '[attr.aria-labelledby]': 'triggerId',
     tabIndex: '0',
+    '[class]': 'finalClasses()',
   },
 })
 export class BrTabContentDirective {
@@ -18,11 +20,19 @@ export class BrTabContentDirective {
 
   /** O identificador único para este painel de conteúdo. */
   readonly brTabContent = input.required<string>();
+  readonly customClass = input<string>('', { alias: 'class' });
 
   // --- Estado Derivado ---
   /** Signal computado que verifica se este painel deve estar ativo. */
   readonly isActive = computed(
     () => this.tabsManager.activeTab() === this.brTabContent()
+  );
+
+  readonly finalClasses = computed(() =>
+    cn(
+      'mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+      this.customClass()
+    )
   );
 
   // --- IDs para Acessibilidade ---

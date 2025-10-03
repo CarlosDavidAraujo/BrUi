@@ -1,6 +1,7 @@
 import { Directive, ElementRef, computed, inject, input } from '@angular/core';
 import { FocusableOption } from '@angular/cdk/a11y';
 import { BrTabsDirective } from './tabs.directive';
+import { cn } from '@/lib/utils';
 
 @Directive({
   selector: 'button[brTabTrigger]',
@@ -9,6 +10,9 @@ import { BrTabsDirective } from './tabs.directive';
     role: 'tab',
     '(click)': 'selectTab()',
     '[attr.data-state]': 'isActive() ? "active" : "inactive"',
+    '[class]': 'finalClasses()',
+
+    //Acessibilidade
     '[attr.aria-selected]': 'isActive()',
     '[attr.tabindex]': 'isActive() ? 0 : -1',
     '[id]': 'id',
@@ -23,6 +27,14 @@ export class BrTabTriggerDirective implements FocusableOption {
   // --- Input e IDs ---
   /** O identificador único para esta aba. */
   readonly brTabTrigger = input.required<string>();
+  readonly customClass = input<string>('', { alias: 'class' });
+
+  finalClasses = computed(() =>
+    cn(
+      'inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm',
+      this.customClass()
+    )
+  );
 
   get id(): string {
     return `br-tab-trigger-${this.brTabTrigger()}`;

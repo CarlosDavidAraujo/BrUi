@@ -1,0 +1,92 @@
+<app-docs-header
+  title="Button"
+  description="Exibe um botão ou um componente que se parece com um botão."
+/>
+
+<app-component-preview title="">
+  <div class="flex gap-4">
+    <button brButton variant="primary">Primário</button>
+    <button brButton variant="secondary">Secundário</button>
+    <button brButton>Terciário</button>
+  </div>
+</app-component-preview>
+
+<app-component-preview title="Com Ícone" [code]="withIconsCode">
+  <div class="flex gap-4">
+    <button brButton size="icon" variant="primary">
+      <i class="fas fa-city" aria-hidden="true"></i>
+    </button>
+    <button brButton size="icon" variant="secondary">
+      <i class="fas fa-city" aria-hidden="true"></i>
+    </button>
+    <button brButton size="icon">
+      <i class="fas fa-city" aria-hidden="true"></i>
+    </button>
+  </div>
+</app-component-preview>
+<!-- 
+<app-docs-subheader title="Instalação" />
+<div brTabs [(activeTab)]="abaInstalacao" class="mt-4">...</div>
+
+<app-docs-subheader title="Uso" />
+<br-code [code]="code.usage" language="typescript" class="mt-4" />
+
+<app-docs-subheader title="Usando como Link" />
+<p class="mt-2">...</p>
+<br-code [code]="code.link" language="html" class="mt-4" />
+
+<app-docs-subheader title="Exemplos" />
+
+<app-component-preview title="Padrão">
+  <div preview><button brButton>Padrão</button></div>
+  <div code>code</div>
+</app-component-preview>
+
+<app-component-preview title="Primário">
+  <div preview><button brButton variant="primary">Primário</button></div>
+  <div code>code</div>
+</app-component-preview>
+
+<app-component-preview title="Secondary">
+  <div preview>
+    <button brButton variant="secondary">Secundário</button>
+  </div>
+  <div code>code</div>
+</app-component-preview>
+
+<app-component-preview title="Destructive">
+  <div preview>
+    <button brButton variant="destructive">Destrutivo</button>
+  </div>
+  <div code>code</div>
+</app-component-preview>
+
+<app-component-preview title="Link">
+  <div preview><button brButton variant="link">Link</button></div>
+  <div code>code</div>
+</app-component-preview>
+
+<app-component-preview title="Icon">
+  <div preview>
+    <button brButton size="icon">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="h-4 w-4"
+      >
+        <path d="M4 12h16" />
+        <path d="M4 18h16" />
+        <path d="M4 6h16" />
+      </svg>
+    </button>
+  </div>
+  <div code>code</div>
+</app-component-preview>
+ -->

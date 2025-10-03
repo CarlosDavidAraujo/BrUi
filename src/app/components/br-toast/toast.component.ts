@@ -1,14 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   input,
-  Input,
   output,
-  Output,
 } from '@angular/core';
 import { ToastData } from './toast.model';
-import { toastAnimation } from './toast.animations';
 
 @Component({
   selector: 'br-toast',
@@ -74,10 +70,10 @@ import { toastAnimation } from './toast.animations';
     } }
 
     <div class="flex-1">
-      @if (data.title) {
-      <p class="font-semibold text-slate-800">{{ data.title }}</p>
+      @if (data().title) {
+      <p class="font-semibold text-slate-800">{{ data().title }}</p>
       }
-      <p class="text-sm text-slate-600">{{ data.message }}</p>
+      <p class="text-sm text-slate-600">{{ data().message }}</p>
     </div>
 
     <button
@@ -100,15 +96,16 @@ import { toastAnimation } from './toast.animations';
       <span class="sr-only">Fechar</span>
     </button>
   `,
-  animations: [toastAnimation],
   host: {
-    '[@toastAnimation]': '',
     role: 'status',
     'aria-live': 'polite',
     class:
       'flex w-full max-w-sm items-start gap-3 rounded-lg bg-white p-4 shadow-lg ring-1 ring-black/5',
+    'animate.enter': "'toast-enter'",
+    'animate.leave': "'toast-leave'",
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./toast.component.css'],
 })
 export class BrToastComponent {
   data = input.required<ToastData>();

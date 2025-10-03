@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { BrToastService } from './toast.service';
-import { BrToastComponent } from './toaster.component'; // Criaremos a seguir
+import { BrToastComponent } from './toast.component'; // Criaremos a seguir
 
 @Component({
   selector: 'br-toaster',
