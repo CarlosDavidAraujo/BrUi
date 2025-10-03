@@ -1,50 +1,28 @@
-<div
-  brTabs
-  [(activeTab)]="abaAtual"
-  class="w-full max-w-lg rounded-lg bg-white p-6 shadow-md"
->
-  <div
-    brTabList
-    aria-label="Configurações da Conta"
-    class="flex border-b border-slate-200"
-  >
-    <button
-      brTabTrigger="perfil"
-      class="-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-600 data-[state=inactive]:hover:border-slate-300 data-[state=inactive]:hover:text-slate-800 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600"
-    >
-      Perfil
-    </button>
-    <button
-      brTabTrigger="conta"
-      class="-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-600 data-[state=inactive]:hover:border-slate-300 data-[state=inactive]:hover:text-slate-800 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600"
-    >
-      Conta
-    </button>
-    <button
-      brTabTrigger="notificacoes"
-      class="-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors duration-150 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 data-[state=inactive]:border-transparent data-[state=inactive]:text-slate-600 data-[state=inactive]:hover:border-slate-300 data-[state=inactive]:hover:text-slate-800 data-[state=active]:border-blue-600 data-[state=active]:text-blue-600"
-    >
-      Notificações
-    </button>
+<div class="w-full max-w-lg space-y-8 rounded-lg bg-white p-6 shadow-md">
+  <div class="flex flex-col gap-2">
+    <label for="comentario" class="text-sm font-semibold text-slate-800">
+      Seu Comentário
+    </label>
+    <textarea
+      brTextarea
+      id="comentario"
+      [(ngModel)]="comentario"
+      placeholder="Digite seu comentário aqui... Veja como o campo cresce!"
+      class="w-full rounded-md border-slate-300 shadow-sm transition-colors focus:border-blue-500 focus:ring-blue-500"
+    ></textarea>
   </div>
 
-  <div brTabContent="perfil">
-    <h3 class="text-lg font-semibold text-slate-800">Seu Perfil</h3>
-    <p class="mt-2 text-slate-700">
-      Aqui você pode editar suas informações públicas, como nome e avatar.
-    </p>
-  </div>
-  <div brTabContent="conta">
-    <h3 class="text-lg font-semibold text-slate-800">Sua Conta</h3>
-    <p class="mt-2 text-slate-700">
-      Aqui você pode gerenciar as configurações da sua conta, como email e
-      senha.
-    </p>
-  </div>
-  <div brTabContent="notificacoes">
-    <h3 class="text-lg font-semibold text-slate-800">Suas Notificações</h3>
-    <p class="mt-2 text-slate-700">
-      Aqui você pode configurar como gostaria de ser notificado.
-    </p>
+  <div class="flex flex-col gap-2">
+    <label for="bio" class="text-sm font-semibold text-slate-800">
+      Biografia (mínimo 2, máximo 5 linhas)
+    </label>
+    <textarea
+      brTextarea
+      [minRows]="2"
+      [maxRows]="5"
+      [(ngModel)]="bio"
+      id="bio"
+      class="w-full rounded-md border-slate-300 shadow-sm transition-colors focus:border-blue-500 focus:ring-blue-500"
+    ></textarea>
   </div>
 </div>
