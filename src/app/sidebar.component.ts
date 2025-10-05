@@ -62,5 +62,6 @@ export class SidebarComponent {
     { path: '/dialog', label: 'Dialog' },
     { path: '/accordion', label: 'Accordion' },
     { path: '/collapsible', label: 'Collapsible' },
+    { path: '/input-group', label: 'Input Group' },
   ].sort((a, b) => a.label.localeCompare(b.label)); // Ordena alfabeticamente
 }

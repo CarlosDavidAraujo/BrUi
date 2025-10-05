@@ -7,6 +7,7 @@ import { CardPageComponent } from './pages/card.page';
 import { CollapsiblePageComponent } from './pages/collapsible.page';
 import { DialogPageComponent } from './pages/dialog.page';
 import { TooltipPage } from './pages/tooltip.page';
+import { InputGroupPage } from './pages/input-group.page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'introduction', pathMatch: 'full' }, // Redireciona a home para a introdução
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'collapsible', component: CollapsiblePageComponent },
   { path: 'dialog', component: DialogPageComponent },
   { path: 'tooltip', component: TooltipPage },
+  { path: 'input-group', component: InputGroupPage },
   // Adicione aqui as rotas para os outros componentes...
   // { path: 'card', component: CardPageComponent },
   // { path: 'select', component: SelectPageComponent },
