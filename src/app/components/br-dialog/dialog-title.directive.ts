@@ -1,18 +1,19 @@
-import { Directive } from '@angular/core';
+import { cn } from '@/lib/utils';
+import { computed, Directive, input } from '@angular/core';
+import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[brDialogTitle]',
+  selector: '[brDialogTitle], br-dialog-title',
   standalone: true,
   host: {
-    // 1. Vincula a propriedade 'id' da classe ao atributo 'id' do elemento HTML
     '[id]': 'id',
-    class: 'text-lg font-semibold text-slate-900',
+    '[class]': 'finalClasses()',
   },
 })
 export class BrDialogTitleDirective {
-  // 2. Um contador estático para garantir que cada título de diálogo tenha um ID único
   private static nextId = 0;
-
-  // 3. A propriedade 'id' pública que a BrDialogPanelDirective irá ler
   readonly id = `br-dialog-title-${BrDialogTitleDirective.nextId++}`;
+
+  customClass = input<ClassValue>('', { alias: 'class' });
+  finalClasses = computed(() => cn('font-bold text-lg', this.customClass()));
 }

@@ -1,17 +1,20 @@
-import { Directive } from '@angular/core';
+import { cn } from '@/lib/utils';
+import { computed, Directive, input } from '@angular/core';
+import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[brDialogDescription]',
+  selector: '[brDialogDescription], br-dialog-description',
   standalone: true,
   host: {
     '[id]': 'id',
-    class: 'mt-2 text-sm text-slate-600',
+    '[class]': 'finalClasses()',
   },
 })
 export class BrDialogDescriptionDirective {
-  // Um contador estático para garantir IDs únicos
   private static nextId = 0;
 
-  // A propriedade 'id' pública que a BrDialogPanelDirective irá ler
   readonly id = `br-dialog-description-${BrDialogDescriptionDirective.nextId++}`;
+
+  customClass = input<ClassValue>('', { alias: 'class' });
+  finalClasses = computed(() => cn('text-sm', this.customClass()));
 }

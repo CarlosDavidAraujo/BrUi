@@ -1,31 +1,32 @@
-import { Directive, booleanAttribute, computed, model } from '@angular/core';
+import { Directive, computed, model, input } from '@angular/core';
+import { cn } from '@/lib/utils';
+import { ClassValue } from 'clsx';
 
-// Exportamos o tipo de estado para consistência
 export type CollapsibleState = 'open' | 'closed';
 
 @Directive({
-  selector: '[brCollapsible]',
+  selector: '[brCollapsible], br-collapsible',
   standalone: true,
   exportAs: 'brCollapsible',
   host: {
-    // Aplica o data-state no próprio container, permitindo estilizar
     '[attr.data-state]': 'dataState()',
+    '[class]': 'finalClasses()',
   },
 })
 export class BrCollapsibleDirective {
-  // 1. O estado principal, usando model() para two-way binding [(open)]
   readonly open = model(false);
 
-  // 2. Um contador para garantir IDs únicos para o atributo aria-controls
   private static nextId = 0;
   readonly contentId = `br-collapsible-content-${BrCollapsibleDirective.nextId++}`;
 
-  // 3. Um estado derivado para o atributo data-state
   readonly dataState = computed<CollapsibleState>(() =>
-    this.open() ? 'open' : 'closed'
+    this.open() ? 'open' : 'closed',
   );
 
-  // --- API Pública ---
+  private readonly class = 'block';
+  customClass = input<ClassValue>('', { alias: 'class' });
+  finalClasses = computed(() => cn(this.class, this.customClass()));
+
   toggle(): void {
     this.open.update((value) => !value);
   }

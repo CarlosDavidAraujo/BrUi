@@ -1,45 +1,45 @@
-// accordion.directive.ts
-
 import {
   AfterContentInit,
-  ContentChildren,
+  computed,
+  contentChildren,
   Directive,
-  QueryList,
   input,
-  inject,
-  effect,
-  booleanAttribute,
   viewChildren,
 } from '@angular/core';
 import { FocusKeyManager } from '@angular/cdk/a11y';
 import { CdkAccordion } from '@angular/cdk/accordion';
 import { BrAccordionItemDirective } from './accordion-item.directive';
+import { ClassValue } from 'clsx';
+import { cn } from '@/lib/utils';
+import { BrAccordionTriggerComponent } from './accordion-trigger.component';
 
 @Directive({
-  selector: '[brAccordion]',
+  selector: '[brAccordion], br-accordion',
   standalone: true,
-  hostDirectives: [CdkAccordion],
+  hostDirectives: [
+    {
+      directive: CdkAccordion,
+      inputs: ['multi'],
+    },
+  ],
   host: {
-    class: 'w-full max-w-lg mx-auto space-y-2 font-san',
+    '[class]': 'finalClasses()',
   },
 })
 export class BrAccordionDirective implements AfterContentInit {
-  // 3. Adicionar o input para controlar o modo
-  readonly mode = input<'single' | 'multiple'>('single');
+  customClass = input<ClassValue>('', {
+    alias: 'class',
+  });
 
-  // 4. Injetar a instância do CdkAccordion do nosso próprio host
-  private readonly cdkAccordion = inject(CdkAccordion, { self: true });
+  private readonly class = 'block';
 
-  private readonly items = viewChildren(BrAccordionItemDirective);
+  finalClasses = computed(() => cn(this.class, this.customClass()));
 
-  private keyManager!: FocusKeyManager<BrAccordionItemDirective>;
+  private readonly items = contentChildren(BrAccordionTriggerComponent, {
+    descendants: true,
+  });
 
-  constructor() {
-    // 5. Usar um effect para sincronizar nosso input com a propriedade do CDK
-    effect(() => {
-      this.cdkAccordion.multi = this.mode() === 'multiple';
-    });
-  }
+  private keyManager!: FocusKeyManager<BrAccordionTriggerComponent>;
 
   ngAfterContentInit(): void {
     this.keyManager = new FocusKeyManager(this.items()).withWrap();

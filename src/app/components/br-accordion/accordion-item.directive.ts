@@ -1,56 +1,44 @@
-import {
-  Directive,
-  computed,
-  signal,
-  forwardRef,
-  ElementRef, // Importar ElementRef
-  inject, // Importar inject
-} from '@angular/core';
+import { Directive, computed, inject, input } from '@angular/core';
 import { CdkAccordionItem } from '@angular/cdk/accordion';
-import { FocusableOption } from '@angular/cdk/a11y';
-
-export type AccordionItemState = 'open' | 'closed';
-
-// Um contador simples para gerar IDs únicos
-let nextId = 0;
+import { ClassValue } from 'clsx';
+import { cn } from '@/lib/utils';
 
 @Directive({
-  selector: '[brAccordionItem]',
+  selector: '[brAccordionItem], br-accordion-item',
   standalone: true,
   exportAs: 'brAccordionItem',
-  hostDirectives: [CdkAccordionItem],
+  hostDirectives: [
+    {
+      directive: CdkAccordionItem,
+      inputs: ['expanded', 'disabled'],
+      outputs: ['opened', 'closed', 'destroyed'],
+    },
+  ],
   host: {
-    '[attr.data-state]': 'state()',
+    '[attr.data-state]': 'state',
     '[class.br-accordion-item]': 'true',
-    class: 'border border-slate-200 rounded-md',
-    // O CDK já adiciona o [id], mas podemos ser explícitos se quisermos
+    '[class]': 'finalClass()',
   },
 })
-export class BrAccordionItemDirective implements FocusableOption {
+export class BrAccordionItemDirective /* implements FocusableOption  */ {
   private readonly cdkItem = inject(CdkAccordionItem);
 
-  // Geramos IDs únicos para vincular o trigger e o content
-  readonly id = `br-accordion-item-${nextId++}`;
-  readonly triggerId = `${this.id}-trigger`;
-  readonly contentId = `${this.id}-content`;
+  private readonly class =
+    'flex flex-col border-b border-border first:border-t';
+  customClass = input<ClassValue>('', { alias: 'class' });
+  finalClass = computed(() => cn(this.class, this.customClass()));
 
-  // O CDK gerencia o estado de expandido, nós apenas o refletimos como um signal.
-  // Isso garante sincronia total com o CDK.
-  readonly #expanded = signal<boolean>(this.cdkItem.expanded);
+  readonly triggerId = `${this.cdkItem.id}-trigger`;
+  readonly contentId = `${this.cdkItem.id}-content`;
 
-  readonly state = computed<AccordionItemState>(() =>
-    this.#expanded() ? 'open' : 'closed'
-  );
-
-  private triggerElement: HTMLElement | null = null;
-
-  constructor() {
-    // Mantemos nosso signal sincronizado com as mudanças do CDK
-    this.cdkItem.opened.subscribe(() => this.#expanded.set(true));
-    this.cdkItem.closed.subscribe(() => this.#expanded.set(false));
+  get state() {
+    return this.cdkItem.expanded ? 'open' : 'closed';
   }
 
-  // API pública que delega para o CDK
+  get disabled(): boolean {
+    return this.cdkItem.disabled;
+  }
+
   open(): void {
     this.cdkItem.open();
   }
@@ -59,15 +47,5 @@ export class BrAccordionItemDirective implements FocusableOption {
   }
   toggle(): void {
     this.cdkItem.toggle();
-  }
-
-  // Método para o trigger se registrar
-  registerTrigger(element: HTMLElement): void {
-    this.triggerElement = element;
-  }
-
-  // Implementação da interface FocusableOption
-  focus() {
-    this.triggerElement?.focus();
   }
 }

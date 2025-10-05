@@ -1,0 +1,30 @@
+<br-dialog #dialog="brDialog">
+  <button brButton brDialogTrigger variant="primary">Abrir diálogo</button>
+  <ng-template brDialogPortal>
+    <br-dialog-content class="min-w-4xl">
+      <br-dialog-header>
+        <br-dialog-title>Concorda com os termos?</br-dialog-title>
+        <br-dialog-description>Descrição do diálogo</br-dialog-description>
+      </br-dialog-header>
+
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+        commodi laboriosam vel sequi quam deleniti, laborum mollitia blanditiis
+        dolores officiis nulla quos dolorem repellat in nisi alias nesciunt
+        fugit. Similique!
+      </p>
+
+      <br-dialog-footer>
+        <button
+          brButton
+          brDialogTrigger
+          variant="secondary"
+          (click)="dialog.close()"
+        >
+          Negar
+        </button>
+        <button brButton brDialogTrigger variant="primary">Aceitar</button>
+      </br-dialog-footer>
+    </br-dialog-content>
+  </ng-template>
+</br-dialog>

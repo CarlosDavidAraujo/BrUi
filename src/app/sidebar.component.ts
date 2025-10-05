@@ -16,26 +16,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
           >Começando</span
         >
         @for (link of gettingStartedLinks; track link.path) {
-        <a
-          [routerLink]="link.path"
-          routerLinkActive="bg-slate-200 text-slate-900"
-          class="rounded-md px-2 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
-        >
-          {{ link.label }}
-        </a>
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="bg-slate-200 text-slate-900"
+            class="rounded-md px-2 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
+          >
+            {{ link.label }}
+          </a>
         }
         <span
           class="mt-4 px-2 py-1 text-xs font-semibold uppercase text-slate-500"
           >Componentes</span
         >
         @for (link of componentLinks; track link.path) {
-        <a
-          [routerLink]="link.path"
-          routerLinkActive="bg-slate-200 text-slate-900"
-          class="rounded-md px-2 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
-        >
-          {{ link.label }}
-        </a>
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="bg-slate-200 text-slate-900"
+            class="rounded-md px-2 py-1.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200"
+          >
+            {{ link.label }}
+          </a>
         }
       </nav>
     </aside>
@@ -61,5 +61,6 @@ export class SidebarComponent {
     { path: '/popover', label: 'Popover' },
     { path: '/dialog', label: 'Dialog' },
     { path: '/accordion', label: 'Accordion' },
+    { path: '/collapsible', label: 'Collapsible' },
   ].sort((a, b) => a.label.localeCompare(b.label)); // Ordena alfabeticamente
 }

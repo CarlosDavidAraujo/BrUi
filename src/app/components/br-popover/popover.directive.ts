@@ -19,22 +19,18 @@ import { take } from 'rxjs';
   exportAs: 'brPopover',
 })
 export class BrPopoverDirective {
-  // --- Injeções de Dependência ---
   private readonly overlay = inject(Overlay);
   private readonly viewContainerRef = inject(ViewContainerRef);
 
-  // --- Estado ---
   readonly open = model(false);
-  private overlayRef: OverlayRef | null = null;
 
-  // --- Referências aos Filhos ---
+  private overlayRef: OverlayRef | null = null;
   private trigger = contentChild.required(BrPopoverTriggerDirective);
   private contentTemplate = contentChild.required(BrPopoverContentDirective, {
     read: TemplateRef,
   });
 
   constructor() {
-    // Reage a mudanças no estado 'open' para criar ou destruir o overlay
     effect(() => {
       if (this.open() && !this.overlayRef) {
         this.openPopover();
@@ -44,7 +40,6 @@ export class BrPopoverDirective {
     });
   }
 
-  // --- API Pública ---
   toggle(): void {
     this.open.update((value) => !value);
   }
@@ -53,11 +48,9 @@ export class BrPopoverDirective {
     this.open.set(false);
   }
 
-  // --- Lógica Interna ---
   private openPopover(): void {
     const triggerElement = this.trigger().elementRef.nativeElement;
 
-    // 1. Cria a estratégia de posicionamento
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(triggerElement)
@@ -67,7 +60,7 @@ export class BrPopoverDirective {
           originY: 'bottom',
           overlayX: 'center',
           overlayY: 'top',
-          offsetY: 8, // Pequeno espaçamento entre o gatilho e o popover
+          offsetY: 8,
         },
         {
           originX: 'center',
@@ -78,23 +71,19 @@ export class BrPopoverDirective {
         },
       ]);
 
-    // 2. Cria o overlay
     this.overlayRef = this.overlay.create({
       positionStrategy,
-      hasBackdrop: true, // Cria um fundo transparente para capturar cliques fora
-      backdropClass: 'cdk-overlay-transparent-backdrop', // Classe do CDK para o fundo
+      hasBackdrop: true,
+      backdropClass: 'cdk-overlay-transparent-backdrop',
     });
 
-    // 3. Cria o portal com o nosso <ng-template>
     const portal = new TemplatePortal(
       this.contentTemplate(),
-      this.viewContainerRef
+      this.viewContainerRef,
     );
 
-    // 4. Anexa o portal ao overlay, renderizando o conteúdo
     this.overlayRef.attach(portal);
 
-    // 5. Ouve por cliques no fundo para fechar o popover
     this.overlayRef
       .backdropClick()
       .pipe(take(1))

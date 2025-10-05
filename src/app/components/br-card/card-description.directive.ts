@@ -1,10 +1,16 @@
-import { Directive } from '@angular/core';
+import { cn } from '@/lib/utils';
+import { computed, Directive, input } from '@angular/core';
+import { ClassValue } from 'clsx';
 
 @Directive({
-  selector: '[brCardDescription]',
+  selector: '[brCardDescription], br-card-description',
   standalone: true,
   host: {
-    class: 'text-sm text-muted-foreground',
+    '[class]': 'finalClasses()',
   },
 })
-export class BrCardDescriptionDirective {}
+export class BrCardDescriptionDirective {
+  private readonly class = 'text-sm';
+  customClass = input<ClassValue>('', { alias: 'class' });
+  finalClasses = computed(() => cn(this.class, this.customClass()));
+}

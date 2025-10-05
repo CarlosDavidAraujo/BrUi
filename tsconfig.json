@@ -5,7 +5,9 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/src/app/*": ["src/app/*"],
+      "@/components/*": ["src/app/components/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

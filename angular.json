@@ -19,9 +19,28 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/app/examples",
+                "output": "/assets/examples/"
               }
             ],
-            "styles": ["src/styles.css"]
+            "styles": [
+              "src/prism.css",
+              "src/styles.css",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css",
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css"
+            ],
+            "scripts": [
+              "node_modules/prismjs/prism.js",
+              "node_modules/prismjs/components/prism-css.min.js",
+              "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js",
+              "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
+              "node_modules/clipboard/dist/clipboard.min.js",
+              "node_modules/prismjs/components/prism-markup.min.js",
+              "node_modules/prismjs/components/prism-typescript.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -72,14 +91,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css",
-              "node_modules/prismjs/themes/prism-tomorrow.css", 
-              "node_modules/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.css"
-            ],
-            "scripts": [
-              "node_modules/highlight.js/lib/common.js" 
-            ]
+            "styles": ["src/styles.css"]
           }
         }
       }
