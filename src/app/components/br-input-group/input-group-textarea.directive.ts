@@ -1,9 +1,19 @@
 import { cn } from '@/lib/utils';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Directive, input } from '@angular/core';
 
 @Directive({
   selector: 'textarea[brInputGroupTextarea]',
-  standalone: true,
+  hostDirectives: [
+    {
+      directive: CdkTextareaAutosize,
+      inputs: [
+        'cdkAutosizeMinRows: minRows',
+        'cdkAutosizeMaxRows: maxRows',
+        'cdkTextareaAutosize: enabled',
+      ],
+    },
+  ],
   host: {
     '[class]': 'finalClasses',
     '[attr.data-slot]': '"input-group-control"',

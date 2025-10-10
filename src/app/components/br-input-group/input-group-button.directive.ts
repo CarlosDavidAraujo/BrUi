@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 type ButtonSize = 'xs' | 'sm' | 'icon-xs' | 'icon-sm';
 
 const inputGroupButtonVariants = cva(
-  'flex items-center justify-center gap-2 text-sm shadow-none',
+  'flex items-center justify-center gap-2 text-sm shadow-none curso-pointer',
   {
     variants: {
       size: {

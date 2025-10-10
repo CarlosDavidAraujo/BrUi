@@ -1,0 +1,72 @@
+<div class="grid w-full max-w-sm gap-6 p-4">
+  <br-input-group>
+    <input brInputGroupInput placeholder="Buscar..." />
+    <br-input-group-addon>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </br-input-group-addon>
+    <br-input-group-addon align="inline-end"
+      >12 resultados</br-input-group-addon
+    >
+  </br-input-group>
+
+  <br-input-group>
+    <input brInputGroupInput placeholder="exemplo.com" class="!pl-1" />
+    <br-input-group-addon>
+      <span brInputGroupText>https://</span>
+    </br-input-group-addon>
+
+    <br-input-group-addon align="inline-end">
+      <button
+        brInputGroupButton
+        brTooltipTrigger
+        class="rounded-full"
+        size="icon-xs"
+      >
+        <i class="fa-solid fa-circle-info"></i>
+        <ng-template brTooltipContent>
+          <div>Este é o conteúdo em um tooltip.</div>
+        </ng-template>
+      </button>
+    </br-input-group-addon>
+  </br-input-group>
+
+  <br-input-group>
+    <textarea
+      brInputGroupTextarea
+      minRows="2"
+      maxRows="10"
+      enabled
+      placeholder="Digite..."
+    ></textarea>
+    <br-input-group-addon align="block-end">
+      <button
+        brInputGroupButton
+        variant="outline"
+        class="rounded-full"
+        size="icon-xs"
+      >
+        <i class="fa-solid fa-circle-plus"></i>
+      </button>
+
+      <!-- Placeholder for DropdownMenu -->
+      <button brInputGroupButton variant="ghost">Auto</button>
+      <span brInputGroupText class="ml-auto">52% usado</span>
+
+      <br-separator orientation="vertical"></br-separator>
+
+      <button brInputGroupButton class="rounded-full" size="icon-xs" disabled>
+        <i class="fa-solid fa-arrow-up"></i>
+        <span class="sr-only">Enviar</span>
+      </button>
+    </br-input-group-addon>
+  </br-input-group>
+
+  <br-input-group>
+    <input brInputGroupInput placeholder="@brui" />
+    <br-input-group-addon align="inline-end">
+      <div class="flex size-4 items-center justify-center rounded-full">
+        <i class="fa-solid fa-circle-check text-primary"></i>
+      </div>
+    </br-input-group-addon>
+  </br-input-group>
+</div>

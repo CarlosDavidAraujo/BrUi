@@ -6,6 +6,7 @@ import { ComponentUsage } from '../docs/component-usage.component';
 import { DialogSizeExample } from '../examples/dialog-size.demo';
 
 @Component({
+  selector: 'app-dialog-page',
   imports: [
     ComponentPreviewComponent,
     DocsHeaderComponent,

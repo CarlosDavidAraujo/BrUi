@@ -1,7 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { twMerge } from 'tailwind-merge';
-import { clsx, type ClassValue } from 'clsx';
-import { cn } from '../../../lib/utils';
+import { type ClassValue } from 'clsx';
+import { cn } from '@/lib/utils';
 
 @Component({
   selector: 'br-separator',
@@ -34,11 +33,11 @@ export class BrSeparatorComponent {
    */
   readonly finalClasses = computed(() =>
     cn(
-      'shrink-0 bg-slate-200', // Classes base para cor e comportamento em flexbox
+      'shrink-0 bg-border', // Classes base para cor e comportamento em flexbox
       this.orientation() === 'horizontal'
         ? 'h-[1px] w-full' // Classes para a versão horizontal
         : 'w-[1px] h-full', // Classes para a versão vertical
-      this.userClass()
-    )
+      this.userClass(),
+    ),
   );
 }
